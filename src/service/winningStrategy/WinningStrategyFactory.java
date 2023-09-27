@@ -2,7 +2,8 @@ package service.winningStrategy;
 
 public class WinningStrategyFactory {
 
-    public WinningStrategy getWinningStrategy(){
-        return null;
+    public WinningStrategy getWinningStrategy(WinningStrategies winningStrategies, int dimension){
+        //TODO: add a switch case for different strategy chosen and return the object
+        return new OrderOneWinningStrategy(dimension);
     }
 }

@@ -5,6 +5,10 @@ public class Move {
     private Player player;
     private Cell cell;
 
+    public Move(int row, int col) {
+        this.cell = new Cell(row, col);
+    }
+
     public Player getPlayer() {
         return player;
     }

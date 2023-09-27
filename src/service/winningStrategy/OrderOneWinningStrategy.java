@@ -32,21 +32,6 @@ public class OrderOneWinningStrategy implements WinningStrategy{
         }
     }
 
-    public boolean isTopLeftDiagonalCell(int row, int col){
-        return row == col;
-    }
-
-    public boolean isTopRightDiagonalCell(int row, int col){
-        return (row + col) == (dimension - 1);
-    }
-
-    public boolean isCornerCell(int row, int col){
-        if(row == 0 || row == dimension - 1){
-            return (col == 0 || col == dimension - 1);
-        }
-        return false;
-    }
-
     @Override
     public Player checkWinner(Board board, Move lastMove) {
 
@@ -57,66 +42,59 @@ public class OrderOneWinningStrategy implements WinningStrategy{
 
         if(checkRowWin(row, symbol)
                 || checkColWin(col, symbol)
-                || (isTopLeftDiagonalCell(row, col) && checkTopLeftWin(row, col, symbol))
-                || (isTopRightDiagonalCell(row, col) && checkTopRightWin(row, col, symbol))
-                || (isCornerCell(row, col) && checkCornerWin(row, col, symbol))){
+                || (isTopLeftDiagonalCell(row, col) && checkTopLeftWin(symbol))
+                || (isTopRightDiagonalCell(row, col) && checkTopRightWin(symbol))
+                || (isCornerCell(row, col) && checkCornerWin(symbol))){
             return player;
         }
-
 
         return null;
     }
 
-    public boolean checkRowWin(int row, char symbol){
-        if(!rowHashMaps.get(row).containsKey(symbol)){
-            rowHashMaps.get(row).put(symbol, 0);
+    private boolean isTopLeftDiagonalCell(int row, int col){
+        //cells in this diagonal will always satisfy following condition
+        return row == col;
+    }
+
+    private boolean isTopRightDiagonalCell(int row, int col){
+        //cells in this diagonal will always satisfy following condition
+        return (row + col) == (dimension - 1);
+    }
+
+    private boolean isCornerCell(int row, int col){
+        if(row == 0 || row == dimension - 1){
+            return (col == 0 || col == dimension - 1);
         }
+        return false;
+    }
 
+    private boolean checkRowWin(int row, char symbol){
+        rowHashMaps.get(row).putIfAbsent(symbol, 0);
         rowHashMaps.get(row).put(symbol, rowHashMaps.get(row).get(symbol) + 1);
-
         return rowHashMaps.get(row).get(symbol) == dimension;
     }
 
-    public boolean checkColWin(int col, char symbol){
-        if(!colHashMaps.get(col).containsKey(symbol)){
-            colHashMaps.get(col).put(symbol, 0);
-        }
-
+    private boolean checkColWin(int col, char symbol){
+        colHashMaps.get(col).putIfAbsent(symbol, 0);
         colHashMaps.get(col).put(symbol, colHashMaps.get(col).get(symbol) + 1);
-
         return colHashMaps.get(col).get(symbol) == dimension;
     }
 
-    public boolean checkTopLeftWin(int row, int col, char symbol){
-
-        if(!topLeftHashMap.containsKey(symbol)){
-            topLeftHashMap.put(symbol, 0);
-        }
-
+    private boolean checkTopLeftWin(char symbol){
+        topLeftHashMap.putIfAbsent(symbol, 0);
         topLeftHashMap.put(symbol, topLeftHashMap.get(symbol) + 1);
-
         return topLeftHashMap.get(symbol) == dimension;
     }
 
-    public boolean checkTopRightWin(int row, int col, char symbol){
-        if(!topRightHashMap.containsKey(symbol)){
-            topRightHashMap.put(symbol, 0);
-        }
-
+    private boolean checkTopRightWin(char symbol){
+        topRightHashMap.putIfAbsent(symbol, 0);
         topRightHashMap.put(symbol, topRightHashMap.get(symbol) + 1);
-
         return topRightHashMap.get(symbol) == dimension;
     }
 
-    public boolean checkCornerWin(int row, int col, char symbol){
-        if(!cornerHashMap.containsKey(symbol)){
-            cornerHashMap.put(symbol, 0);
-        }
-
+    private boolean checkCornerWin(char symbol){
+        cornerHashMap.putIfAbsent(symbol, 0);
         cornerHashMap.put(symbol, cornerHashMap.get(symbol) + 1);
-
-        return topRightHashMap.get(symbol) == 4;
+        return cornerHashMap.get(symbol) == 4;
     }
-
-
 }
