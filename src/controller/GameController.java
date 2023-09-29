@@ -1,5 +1,6 @@
 package controller;
 
+import exception.GameOverException;
 import models.*;
 import service.winningStrategy.WinningStrategies;
 import service.winningStrategy.WinningStrategyFactory;
@@ -36,7 +37,7 @@ public class GameController {
         return game.getWinner();
     }
 
-    public Move executeMove(Game game, Player player){
+    public Move executeMove(Game game, Player player) throws GameOverException {
 
         Move move = player.makeMove(game.getCurrentBoard());
 
@@ -62,6 +63,10 @@ public class GameController {
         return null;
     }
 
+    public void restartGame(Game game){
+        //TODO
+    }
+
 
     private void updateGameMoves(Game game, Move move){
         game.getMoves().add(move);
@@ -74,7 +79,7 @@ public class GameController {
     private void updateGameStatus(Game game){
         int numberOfSymbols = game.getNumberOfSymbols();
         int dimension = game.getCurrentBoard().getSize();
-        if(numberOfSymbols == dimension*dimension){
+        if(numberOfSymbols == (dimension * dimension)){
             game.setGameStatus(GameStatus.DRAW);
         }
     }

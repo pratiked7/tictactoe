@@ -20,7 +20,6 @@ public class Game {
     private List<Move> moves;
     private List<Board> boardStates;
     private WinningStrategy winningStrategy;
-
     private int numberOfSymbols;
 
 

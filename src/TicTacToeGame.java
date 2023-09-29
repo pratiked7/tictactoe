@@ -29,7 +29,7 @@ public class TicTacToeGame {
             ite = ite - 1;
         }
 
-        for (int i = 1; i < ite; i++) {
+        for (int i = 1; i <= ite; i++) {
 
             System.out.println("What is the name of player, number: " + i);
             String playerName = scanner.next();
@@ -69,11 +69,12 @@ public class TicTacToeGame {
 
             Move movePlayed = gameController.executeMove(game, players.get(playerIndex));
 
-            System.out.println("Do you want to undo your move? Y/N");
+            //TODO
+/*            System.out.println("Do you want to undo your move? Y/N");
             String isUndo = scanner.next();
             if (isUndo.equalsIgnoreCase("Y")){
                 gameController.undoMove(game, movePlayed);
-            }
+            }*/
 
             Player winner = gameController.checkWinner(game, movePlayed);
 

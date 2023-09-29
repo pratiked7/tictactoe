@@ -19,7 +19,7 @@ public class Cell {
         if (player == null){
             System.out.print("| |");
         } else {
-            System.out.println("| " + player.getSymbol() + " |");
+            System.out.print("|" + player.getSymbol() + "|");
         }
     }
 

@@ -11,7 +11,7 @@ public class RandomBotPlayingStrategy implements BotPlayingStrategy{
     //find the next empty cell and makes move
 
     @Override
-    public Move makeMove(Board board, Player player) {
+    public Move makeMove(Board board, Player player) throws GameOverException{
 
         List<List<Cell>> matrix = board.getBoard();
 
@@ -22,7 +22,7 @@ public class RandomBotPlayingStrategy implements BotPlayingStrategy{
                 if (matrix.get(i).get(j).getCellState().equals(CellState.EMPTY)){
                     board.getBoard().get(i).get(j).setPlayer(player);
                     board.getBoard().get(i).get(j).setCellState(CellState.FILLED);
-                    return new Move(i, j);
+                    return new Move(i, j, player);
                 }
             }
         }
