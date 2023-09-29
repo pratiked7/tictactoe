@@ -21,6 +21,8 @@ public class Game {
     private List<Board> boardStates;
     private WinningStrategy winningStrategy;
 
+    private int numberOfSymbols;
+
 
     //private constructor for builder design pattern
     private Game(Board currentBoard, List<Player> players, WinningStrategy winningStrategy) {
@@ -30,6 +32,79 @@ public class Game {
         this.moves = new ArrayList<>(); // initialize the list of moves
         this.boardStates = new ArrayList<>(); //initialize the list of board states
         this.winningStrategy = winningStrategy;
+        this.numberOfSymbols = 0;
+    }
+
+    public Board getCurrentBoard() {
+        return currentBoard;
+    }
+
+    public void setCurrentBoard(Board currentBoard) {
+        this.currentBoard = currentBoard;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
+    }
+
+    public void setMoves(List<Move> moves) {
+        this.moves = moves;
+    }
+
+    public List<Board> getBoardStates() {
+        return boardStates;
+    }
+
+    public void setBoardStates(List<Board> boardStates) {
+        this.boardStates = boardStates;
+    }
+
+    public WinningStrategy getWinningStrategy() {
+        return winningStrategy;
+    }
+
+    public void setWinningStrategy(WinningStrategy winningStrategy) {
+        this.winningStrategy = winningStrategy;
+    }
+
+    public int getNumberOfSymbols() {
+        return numberOfSymbols;
+    }
+
+    public void setNumberOfSymbols(int numberOfSymbols) {
+        this.numberOfSymbols = numberOfSymbols;
     }
 
     public static Builder builder(){

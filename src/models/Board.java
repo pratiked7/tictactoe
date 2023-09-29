@@ -21,6 +21,11 @@ public class Board {
         }
     }
 
+    public Board(Board board){
+        this.size = board.size;
+        this.board = board.board;
+    }
+
     public void printBoard(){
         for (int i = 0; i < size; i++){
             List<Cell> cells = board.get(i);
